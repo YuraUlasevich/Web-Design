@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+        }
+        #edge{
+            width: 500px;
+            height: 200px;
+            border: 1px solid #3377af;
+            padding: 5px;
+        }
+        .box{
+            position: relative;
+            left: 14px;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #a82244;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+</head>
+<body>
+    <div id="edge">
+        <div class="box" style="top:20; background: blue;"></div>
+    </div>
+    <br/>
+    <input type="button" id="btnAnimate" name="btnAnimate" value="Animate" />
+    <script>
+    $(function(){
+        $("#btnAnimate").click(function(){
+            var move ="";
+            if($(".box:eq(0)").css('left') == "14px"){
+                move = "+=" + ($("#edge").width() - 66);
+            } else if($(".box:eq(0)").css('left') == "460px"){
+                move = "+=" + ($("#edge").width() - 33);
+            }
+            $(".box").animate({
+                left: move
+            }, 500, function(){
+                if($(".box").css('left') == "460px"){
+                    $(".box:eq(0)").css('background', '#ECF109');
+                } else{
+                    $(".box:eq(0)").css('background', "blue");
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

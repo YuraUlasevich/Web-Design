@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var file = '{"name":"Yura", "age":21,"isSudent":true }';
+        var user = JSON.parse(file);
+        console.log(user);
+        var JsonObj= {"0":1,"1":2,"2":3,"3":4};
+        var array = [];
+        for(var i in JsonObj) {
+            if(JsonObj.hasOwnProperty(i) && !isNaN(+i)) {
+                array[+i] = JsonObj[i];
+            }
+        }
+        console.log(array);
+        console.log(Math.min.apply(null, array));
+    </script>
+</body>
+</html>
