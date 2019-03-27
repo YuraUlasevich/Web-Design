@@ -1,26 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta id="test" name="Author" content="Old" />
-    <meta id="test" name="Author" content="Old2" />
-    <meta id="test" name="Author" content="Old3" />
-    <meta id="test" name="Author" content="Old4" />
-    <meta name="description" content="old description" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js" ></script>
-    <script type="javascript" src="data.json"></script>
-    <title>Document</title>
-</head>
-<body>
+<html>
+  <head>
+    <meta charset="utf-8">
 
-    <div></div>
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
 
     <script>
-        var requestURL = 'data/data.json';
-        
-    </script>
+    var header = document.querySelector('header');
+    var section = document.querySelector('section');
+    var requestURL = 'https://github.com/YuraUlasevich/Web-Design/blob/master/lab7/data/data.json';
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var superHeroes = request.response;
+        populateHeader(superHeroes);
+        showHeroes(superHeroes);
+    }
+    function populateHeader(jsonObj) {
+        var myH1 = document.createElement('h1');
+        myH1.textContent = jsonObj['squadName'];
+        header.appendChild(myH1);
+
+        var myPara = document.createElement('p');
+        myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+        header.appendChild(myPara);
+    }
+    function showHeroes(jsonObj) {
+        var heroes = jsonObj['members'];
+            
+        for (var i = 0; i < heroes.length; i++) {
+            var myArticle = document.createElement('article');
+            var myH2 = document.createElement('h2');
+            var myPara1 = document.createElement('p');
+            var myPara2 = document.createElement('p');
+            var myPara3 = document.createElement('p');
+            var myList = document.createElement('ul');
+
+            myH2.textContent = heroes[i].name;
+            myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+            myPara2.textContent = 'Age: ' + heroes[i].age;
+            myPara3.textContent = 'Superpowers:';
+                
+            var superPowers = heroes[i].powers;
+            for (var j = 0; j < superPowers.length; j++) {
+            var listItem = document.createElement('li');
+            listItem.textContent = superPowers[j];
+            myList.appendChild(listItem);
+            }
+
+            myArticle.appendChild(myH2);
+            myArticle.appendChild(myPara1);
+            myArticle.appendChild(myPara2);
+            myArticle.appendChild(myPara3);
+            myArticle.appendChild(myList);
+
+            section.appendChild(myArticle);
+        }        
+
+    }
     
-</body>
+    </script>
+  </body>
 </html>
